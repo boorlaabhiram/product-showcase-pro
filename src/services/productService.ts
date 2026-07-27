@@ -6,18 +6,237 @@ const DUMMYJSON_BASE_URL = 'https://dummyjson.com/products';
 // USD to INR conversion multiplier
 const USD_TO_INR_RATE = 86;
 
+function isElectronicsItem(item: any): boolean {
+  if (!item) return false;
+  const cat = (item.category || '').toLowerCase();
+  const title = (item.title || '').toLowerCase();
+  const brand = (item.brand || '').toLowerCase();
+  const desc = (item.description || '').toLowerCase();
+
+  // Strict list of non-electronics categories to block completely
+  const blockedCategories = [
+    'beauty',
+    'fragrances',
+    'furniture',
+    'groceries',
+    'home-decoration',
+    'kitchen-accessories',
+    'mens-shirts',
+    'mens-shoes',
+    'mens-watches',
+    'skincare',
+    'skin-care',
+    'sunglasses',
+    'tops',
+    'womens-bags',
+    'womens-dresses',
+    'womens-jewellery',
+    'womens-shoes',
+    'womens-watches',
+    'sports-accessories',
+    'motorcycle',
+    'vehicle',
+  ];
+
+  if (blockedCategories.some((bc) => cat === bc || cat.includes(bc))) {
+    if (
+      title.includes('smartwatch') ||
+      title.includes('smart watch') ||
+      title.includes('fitbit') ||
+      title.includes('apple watch') ||
+      title.includes('galaxy watch')
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  // Non-electronics keywords in title or description
+  const nonElectronicsKeywords = [
+    'mascara',
+    'lipstick',
+    'eyeshadow',
+    'perfume',
+    'eau de',
+    'essence',
+    'powder',
+    'foundation',
+    'serum',
+    'cream',
+    'lotion',
+    'cleanser',
+    'shampoo',
+    'conditioner',
+    'soap',
+    'couch',
+    'sofa',
+    'table',
+    'chair',
+    'bed',
+    'cabinet',
+    'shelf',
+    'desk',
+    'cushion',
+    'shirt',
+    'dress',
+    'shoe',
+    'boot',
+    'sandal',
+    'heel',
+    'sneaker',
+    'bag',
+    'handbag',
+    'necklace',
+    'ring',
+    'earring',
+    'jewel',
+    'juice',
+    'pie',
+    'beef',
+    'chicken',
+    'fruit',
+    'vegetable',
+    'plant',
+    'flower',
+    'vase',
+    'curtain',
+    'rug',
+    'towel',
+    'blanket',
+    'pan',
+    'pot',
+    'knife',
+    'fork',
+    'spoon',
+    'plate',
+    'bowl',
+    'mug',
+    'cup',
+  ];
+
+  if (nonElectronicsKeywords.some((kw) => title.includes(kw))) {
+    return false;
+  }
+
+  // Allowed categories in DummyJSON
+  const allowedCategories = ['smartphones', 'laptops', 'tablets', 'mobile-accessories'];
+  if (allowedCategories.includes(cat)) {
+    return true;
+  }
+
+  // Electronics keywords check for brand/title/desc
+  const techKeywords = [
+    'phone',
+    'smartphone',
+    'iphone',
+    'galaxy',
+    'pixel',
+    'oneplus',
+    'xiaomi',
+    'realme',
+    'nothing',
+    'laptop',
+    'macbook',
+    'notebook',
+    'pc',
+    'desktop', 'computer',
+    'rog',
+    'alienware',
+    'legion',
+    'tablet',
+    'ipad',
+    'tab',
+    'watch',
+    'smartwatch',
+    'band',
+    'fitbit',
+    'charger',
+    'cable',
+    'adapter',
+    'power bank',
+    'powerbank',
+    'usb',
+    'hub',
+    'dock',
+    'headphone',
+    'headset',
+    'airpods',
+    'earbud',
+    'buds',
+    'earphone',
+    'speaker',
+    'audio',
+    'soundbar',
+    'tv',
+    'television',
+    'display',
+    'oled',
+    'qled',
+    'camera',
+    'dslr',
+    'gopro',
+    'lens',
+    'monitor',
+    'keyboard',
+    'keychron',
+    'mouse',
+    'logitech',
+    'razer',
+    'ssd',
+    'nvme',
+    'drive',
+    'hdd',
+    'storage',
+    'gpu',
+    'graphics card',
+    'rtx',
+    'gtx',
+    'radeon',
+    'cpu',
+    'intel',
+    'ryzen',
+    'i7',
+    'i9',
+    'm3',
+    'm4',
+    'motherboard',
+    'ram',
+    'memory',
+    'router',
+    'wifi',
+    'printer',
+    'projector',
+    'console',
+    'playstation',
+    'ps5',
+    'xbox',
+    'nintendo',
+    'switch',
+    'gamepad',
+    'air purifier',
+    'smart home',
+    'plug',
+    'bulb',
+    'drone',
+    'case',
+    'cover',
+  ];
+
+  return techKeywords.some((kw) => title.includes(kw) || brand.includes(kw) || desc.includes(kw));
+}
+
 function mapDummyJsonCategory(category: string, title: string = ''): ProductCategory {
   const cat = (category || '').toLowerCase();
   const t = (title || '').toLowerCase();
 
-  if (cat.includes('smartphone') || t.includes('phone') || t.includes('iphone') || t.includes('galaxy') || t.includes('pixel')) {
+  if (cat.includes('smartphone') || t.includes('phone') || t.includes('iphone') || t.includes('galaxy') || t.includes('pixel') || t.includes('oneplus')) {
     return 'Smartphones';
-  }
-  if (cat.includes('laptop') || t.includes('macbook') || t.includes('notebook') || (t.includes('laptop') && !t.includes('gaming'))) {
-    return 'Laptops';
   }
   if (t.includes('gaming laptop') || t.includes('rog') || t.includes('alienware') || t.includes('legion') || t.includes('rtx')) {
     return 'Gaming Laptops';
+  }
+  if (cat.includes('laptop') || t.includes('macbook') || t.includes('notebook') || t.includes('laptop')) {
+    return 'Laptops';
   }
   if (cat.includes('tablet') || t.includes('ipad') || t.includes('tab')) {
     return 'Tablets';
@@ -25,22 +244,19 @@ function mapDummyJsonCategory(category: string, title: string = ''): ProductCate
   if (cat.includes('watch') || t.includes('watch') || t.includes('band') || t.includes('fitbit')) {
     return 'Smart Watches';
   }
-  if (cat.includes('mobile-accessories') || t.includes('case') || t.includes('charger') || t.includes('cable') || t.includes('adapter')) {
-    return 'Accessories';
-  }
   if (t.includes('headphone') || t.includes('headset') || t.includes('wh-1000xm5')) {
     return 'Headphones';
   }
-  if (t.includes('earbud') || t.includes('airpods') || t.includes('buds')) {
+  if (t.includes('earbud') || t.includes('airpods') || t.includes('buds') || t.includes('earphone')) {
     return 'Earbuds';
   }
-  if (t.includes('speaker') || cat.includes('audio')) {
+  if (t.includes('speaker') || cat.includes('audio') || t.includes('soundbar')) {
     return 'Bluetooth Speakers';
   }
-  if (t.includes('tv') || t.includes('television') || t.includes('display') || t.includes('oled')) {
+  if (t.includes('tv') || t.includes('television') || t.includes('display') || t.includes('oled') || t.includes('qled')) {
     return 'Televisions';
   }
-  if (t.includes('camera') || t.includes('sony a7') || t.includes('nikon')) {
+  if (t.includes('camera') || t.includes('sony a7') || t.includes('nikon') || t.includes('canon') || t.includes('gopro')) {
     return 'DSLR Cameras';
   }
   if (t.includes('monitor') || t.includes('curved display')) {
@@ -49,11 +265,20 @@ function mapDummyJsonCategory(category: string, title: string = ''): ProductCate
   if (t.includes('keyboard') || t.includes('keychron')) {
     return 'Mechanical Keyboards';
   }
-  if (t.includes('mouse') || t.includes('logitech mx')) {
+  if (t.includes('mouse') || t.includes('logitech mx') || t.includes('razer')) {
     return 'Gaming Mouse';
   }
   if (t.includes('ssd') || t.includes('nvme') || t.includes('drive') || t.includes('storage')) {
     return 'SSD Storage';
+  }
+  if (t.includes('power bank') || t.includes('powerbank') || t.includes('anker')) {
+    return 'Power Banks';
+  }
+  if (t.includes('charger') || t.includes('adapter') || t.includes('gan')) {
+    return 'Fast Chargers';
+  }
+  if (cat.includes('mobile-accessories') || t.includes('case') || t.includes('cable') || t.includes('usb')) {
+    return 'Accessories';
   }
 
   return 'Accessories';
@@ -157,9 +382,11 @@ export async function fetchLiveProducts(): Promise<{ products: Product[]; error:
       throw new Error('Invalid products array');
     }
 
-    const apiProducts = data.products.map(mapDummyJsonToProduct);
+    // STRICTLY FILTER to electronics items only
+    const electronicsOnly = data.products.filter(isElectronicsItem);
+    const apiProducts = electronicsOnly.map(mapDummyJsonToProduct);
 
-    // Merge API products with static demo products
+    // Merge API products with static demo products (which are 100% electronics)
     const existingIds = new Set(apiProducts.map((p: Product) => p.id));
     const merged = [...apiProducts];
 
@@ -186,7 +413,7 @@ export async function searchLiveProducts(query: string): Promise<Product[]> {
     if (res.ok) {
       const data = await res.json();
       if (data.products && Array.isArray(data.products)) {
-        return data.products.map(mapDummyJsonToProduct);
+        return data.products.filter(isElectronicsItem).map(mapDummyJsonToProduct);
       }
     }
   } catch (e) {
