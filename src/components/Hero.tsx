@@ -1,28 +1,33 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { Sparkles, ArrowRight, ShieldCheck, Zap, Star, Play, Layers } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Sparkles, ArrowRight, Star, Play, Bot, ShieldCheck, Zap } from 'lucide-react';
 import { Product } from '../types/product';
 import { PRODUCTS } from '../data/products';
-import { formatCurrency } from '../lib/utils';
+import { formatINR } from '../lib/utils';
 
 interface HeroProps {
   onQuickView: (product: Product) => void;
   onExploreCollection: () => void;
+  onOpenAIModal: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onQuickView, onExploreCollection }) => {
-  const flagshipProduct = PRODUCTS[0]; // Aura Studio Headphones
+export const Hero: React.FC<HeroProps> = ({
+  onQuickView,
+  onExploreCollection,
+  onOpenAIModal,
+}) => {
+  const flagshipProduct = PRODUCTS[0]; // iPhone 16 Pro Max or primary spotlight
 
   return (
-    <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-[#09090b]">
+    <section className="relative pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden bg-[#09090b]">
       {/* Background Ambient Glow Orbs */}
-      <div className="absolute top-[-80px] left-[-80px] w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-[-50px] right-[-50px] w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[110px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-[-80px] left-[-80px] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-[-50px] right-[-50px] w-[450px] h-[450px] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-emerald-500/10 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Frosted Showcase Container */}
-        <div className="bg-white/[0.03] border border-white/10 rounded-[32px] p-6 sm:p-10 lg:p-12 backdrop-blur-xl shadow-2xl">
+        <div className="bg-white/[0.03] border border-white/10 rounded-[32px] p-6 sm:p-10 lg:p-12 backdrop-blur-2xl shadow-2xl">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             {/* Left Text Column */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
@@ -30,21 +35,21 @@ export const Hero: React.FC<HeroProps> = ({ onQuickView, onExploreCollection }) 
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-blue-400 text-xs font-mono font-bold tracking-widest uppercase"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono font-bold tracking-widest uppercase"
               >
-                <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                <span>New Release 2026</span>
+                <Sparkles className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
+                <span>Showcasely India • Official Brand Flagships 2026</span>
               </motion.div>
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-white leading-[0.95]"
+                className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.02]"
               >
-                AURA Studio <span className="text-zinc-600">Max.</span> <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-emerald-400 to-teal-200">
-                  Pure Precision.
+                Discover. Compare.{' '}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-emerald-400">
+                  Shop Smarter.
                 </span>
               </motion.h1>
 
@@ -52,9 +57,9 @@ export const Hero: React.FC<HeroProps> = ({ onQuickView, onExploreCollection }) 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-zinc-400 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed"
+                className="text-zinc-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed"
               >
-                Experience spatial audio like never before with the next generation of acoustic engineering and titanium hardware.
+                Explore India's premier tech catalog. Compare flagship smartphones, gaming laptops, and studio audio gear with AI purchasing guidance and verified INR pricing.
               </motion.p>
 
               {/* CTA Action Buttons */}
@@ -66,18 +71,18 @@ export const Hero: React.FC<HeroProps> = ({ onQuickView, onExploreCollection }) 
               >
                 <button
                   onClick={onExploreCollection}
-                  className="group flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-black font-bold text-sm hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 active:scale-95"
+                  className="group flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-white text-black font-extrabold text-sm hover:bg-zinc-200 transition-all shadow-xl shadow-white/10 active:scale-95"
                 >
-                  <span>Buy Now</span>
+                  <span>Explore Catalog</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
 
                 <button
-                  onClick={() => onQuickView(flagshipProduct)}
-                  className="flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-white/10 text-white font-bold text-sm border border-white/10 hover:bg-white/20 transition-all active:scale-95 backdrop-blur-md"
+                  onClick={onOpenAIModal}
+                  className="flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-blue-600/20 text-blue-300 font-extrabold text-sm border border-blue-500/30 hover:bg-blue-600/30 transition-all active:scale-95 backdrop-blur-md shadow-lg shadow-blue-500/10"
                 >
-                  <Play className="w-4 h-4 text-emerald-400 fill-emerald-400" />
-                  <span>Learn More</span>
+                  <Bot className="w-4 h-4 text-blue-400" />
+                  <span>Ask AI Assistant</span>
                 </button>
               </motion.div>
 
@@ -89,16 +94,16 @@ export const Hero: React.FC<HeroProps> = ({ onQuickView, onExploreCollection }) 
                 className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 max-w-lg mx-auto lg:mx-0"
               >
                 <div>
-                  <div className="text-2xl font-bold font-mono text-white">48 kHz</div>
-                  <div className="text-xs text-zinc-500 font-medium mt-0.5">Lossless Audio</div>
+                  <div className="text-2xl font-bold font-mono text-emerald-400">100%</div>
+                  <div className="text-xs text-zinc-400 font-medium mt-0.5">Brand Authentic</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold font-mono text-white">98.4%</div>
-                  <div className="text-xs text-zinc-500 font-medium mt-0.5">Approval Rating</div>
+                  <div className="text-2xl font-bold font-mono text-blue-400">1-Year</div>
+                  <div className="text-xs text-zinc-400 font-medium mt-0.5">India Warranty</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold font-mono text-white">2-Year</div>
-                  <div className="text-xs text-zinc-500 font-medium mt-0.5">Global Warranty</div>
+                  <div className="text-2xl font-bold font-mono text-indigo-400">Express</div>
+                  <div className="text-xs text-zinc-400 font-medium mt-0.5">24h Dispatch</div>
                 </div>
               </motion.div>
             </div>
@@ -114,10 +119,10 @@ export const Hero: React.FC<HeroProps> = ({ onQuickView, onExploreCollection }) 
                 {/* Badge */}
                 <div className="flex items-center justify-between mb-4">
                   <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-mono font-medium">
-                    ★ Flagship Spotlight
+                    ★ India Flagship Spotlight
                   </span>
-                  <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> In Stock
+                  <span className="text-xs font-bold text-emerald-400 flex items-center gap-1 font-mono">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> Verified Stock
                   </span>
                 </div>
 
@@ -126,16 +131,16 @@ export const Hero: React.FC<HeroProps> = ({ onQuickView, onExploreCollection }) 
                   <img
                     src={flagshipProduct.primaryImage}
                     alt={flagshipProduct.name}
-                    className="w-full h-full object-cover object-center opacity-90"
+                    className="w-full h-full object-cover object-center opacity-95"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/80 via-transparent to-transparent" />
 
                   <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                    <div className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 text-xs font-mono text-zinc-200">
-                      Planar Magnetic
+                    <div className="bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 text-xs font-mono text-zinc-200">
+                      {flagshipProduct.brand}
                     </div>
-                    <div className="bg-white text-black px-3.5 py-1.5 rounded-xl text-xs font-extrabold font-mono shadow-lg">
-                      {formatCurrency(flagshipProduct.price)}
+                    <div className="bg-emerald-500 text-black px-3.5 py-1.5 rounded-xl text-xs font-extrabold font-mono shadow-lg">
+                      {formatINR(flagshipProduct.price)}
                     </div>
                   </div>
                 </div>
@@ -146,7 +151,7 @@ export const Hero: React.FC<HeroProps> = ({ onQuickView, onExploreCollection }) 
                     <h3 className="text-lg font-bold text-white tracking-tight">
                       {flagshipProduct.name}
                     </h3>
-                    <div className="flex items-center text-orange-400 text-xs font-bold gap-1">
+                    <div className="flex items-center text-amber-400 text-xs font-bold gap-1 font-mono">
                       <Star className="w-3.5 h-3.5 fill-current" />
                       <span>{flagshipProduct.rating}</span>
                     </div>
@@ -159,9 +164,9 @@ export const Hero: React.FC<HeroProps> = ({ onQuickView, onExploreCollection }) 
                   <div className="pt-2 flex items-center gap-3">
                     <button
                       onClick={() => onQuickView(flagshipProduct)}
-                      className="flex-1 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 border border-white/10"
+                      className="flex-1 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 border border-white/10"
                     >
-                      <span>Inspect Hardware Specs</span>
+                      <span>Inspect 360° & Specs</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>

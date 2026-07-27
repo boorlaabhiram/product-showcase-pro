@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, ShieldCheck, Truck, RotateCcw, Headphones, Github, Twitter, Linkedin, Youtube, ArrowUpRight } from 'lucide-react';
+import { Compass, ShieldCheck, Truck, RotateCcw, Headphones, Github, Twitter, Linkedin, Youtube } from 'lucide-react';
 
 interface FooterProps {
   onOpenContact: () => void;
@@ -22,8 +22,8 @@ export const Footer: React.FC<FooterProps> = ({
               <Truck className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-xs mb-0.5">Express Priority Shipping</h4>
-              <p className="text-[11px] text-zinc-500 leading-normal">Complimentary 2-3 day shipping on orders over $100.</p>
+              <h4 className="font-bold text-white text-xs mb-0.5">Pan-India Express Shipping</h4>
+              <p className="text-[11px] text-zinc-400 leading-normal">Free 24-48h dispatch across Mumbai, Delhi NCR, Bengaluru & all metros.</p>
             </div>
           </div>
 
@@ -32,8 +32,8 @@ export const Footer: React.FC<FooterProps> = ({
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-xs mb-0.5">2-Year Hardware Warranty</h4>
-              <p className="text-[11px] text-zinc-500 leading-normal">Comprehensive international coverage for peace of mind.</p>
+              <h4 className="font-bold text-white text-xs mb-0.5">Official Brand Warranty</h4>
+              <p className="text-[11px] text-zinc-400 leading-normal">100% authentic products with brand service center coverage in India.</p>
             </div>
           </div>
 
@@ -42,8 +42,8 @@ export const Footer: React.FC<FooterProps> = ({
               <RotateCcw className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-xs mb-0.5">30-Day Risk-Free Returns</h4>
-              <p className="text-[11px] text-zinc-500 leading-normal">Full refund guarantee with free return postage labels.</p>
+              <h4 className="font-bold text-white text-xs mb-0.5">GST Invoice Ready</h4>
+              <p className="text-[11px] text-zinc-400 leading-normal">Input tax credit invoice available for businesses & freelancers.</p>
             </div>
           </div>
 
@@ -52,8 +52,8 @@ export const Footer: React.FC<FooterProps> = ({
               <Headphones className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-xs mb-0.5">24/7 Concierge Support</h4>
-              <p className="text-[11px] text-zinc-500 leading-normal">Direct line to sound engineers and technical advisors.</p>
+              <h4 className="font-bold text-white text-xs mb-0.5">AI Shopping Concierge</h4>
+              <p className="text-[11px] text-zinc-400 leading-normal">Smart Gemini assistance for tech comparisons and budget queries.</p>
             </div>
           </div>
         </div>
@@ -63,14 +63,14 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Brand Bio Column */}
           <div className="col-span-2 space-y-4">
             <a href="#" className="flex items-center gap-3 text-white font-extrabold tracking-widest text-lg">
-              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-black">
-                <Sparkles className="w-4 h-4 fill-black" />
+              <div className="w-8 h-8 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black shadow-lg shadow-blue-500/20">
+                <Compass className="w-4 h-4" />
               </div>
-              <span className="font-serif tracking-tight text-xl text-white">AURA STUDIO</span>
+              <span className="font-bold tracking-tight text-xl text-white">Showcasely</span>
             </a>
 
             <p className="text-zinc-400 text-xs max-w-sm leading-relaxed">
-              Crafting premium acoustic hardware, spatial vision optics, and ergonomic workstation gear designed for creators who insist on perfection.
+              Discover. Compare. Shop Smarter. India's premier high-performance tech showcase platform featuring verified specifications, 360° interactive views, and AI buying guidance.
             </p>
 
             <div className="flex items-center gap-3 pt-2">
@@ -91,13 +91,13 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Column 1: Hardware */}
           <div className="space-y-3">
-            <h5 className="font-mono text-white text-[11px] uppercase tracking-wider font-bold">Catalog</h5>
+            <h5 className="font-mono text-white text-[11px] uppercase tracking-wider font-bold">Categories</h5>
             <ul className="space-y-2 text-zinc-400">
-              <li><a href="#" className="hover:text-white transition-colors">Audio & Sound</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Smart Wearables</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Ergonomic Setup</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Creative Gear</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Vision Tech</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Smartphones</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Laptops & PC</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Audio & Studio</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Gaming Hardware</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Monitors & Displays</a></li>
             </ul>
           </div>
 
@@ -120,7 +120,6 @@ export const Footer: React.FC<FooterProps> = ({
                   Concierge Desk
                 </button>
               </li>
-              <li><a href="#" className="hover:text-white transition-colors">Keynote Streams</a></li>
             </ul>
           </div>
 
@@ -130,20 +129,20 @@ export const Footer: React.FC<FooterProps> = ({
             <ul className="space-y-2 text-zinc-400">
               <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Eco-Material Transparency</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Security Disclosures</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">GST Disclosures</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Security Compliance</a></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono text-zinc-500">
+        <div className="pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono text-zinc-400">
           <div>
-            © 2026 Aura Studio Inc. All rights reserved. Designed with React 19 & Framer Motion.
+            © 2026 Showcasely India. All rights reserved. Built with React 19, Tailwind CSS & Framer Motion.
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-zinc-400">Deploy Status: Vercel Production Ready</span>
+            <span className="text-zinc-300">Deploy Status: Vercel Production Ready</span>
           </div>
         </div>
       </div>

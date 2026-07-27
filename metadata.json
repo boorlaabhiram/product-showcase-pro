@@ -1,6 +1,6 @@
 {
-  "name": "Aura - Premium Product Showcase",
-  "description": "An ultra-luxurious, interactive product showcase and catalog inspired by Apple and Linear, featuring real-time search, quick view modals, wishlist, comparison tool, and Framer Motion animations.",
+  "name": "Showcasely - Tech & Electronics Showcase",
+  "description": "Premium Indian e-commerce product showcase platform for electronics, smartphones, laptops, audio gear, and smart devices with AI recommendations, 360° product views, and store comparisons.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

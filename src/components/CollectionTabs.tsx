@@ -16,8 +16,8 @@ export const CollectionTabs: React.FC<CollectionTabsProps> = ({
     { id: 'featured', label: 'Featured', icon: Sparkles },
     { id: 'trending', label: 'Trending', icon: Flame },
     { id: 'best-seller', label: 'Best Sellers', icon: Trophy },
-    { id: 'new-arrival', label: 'New Arrivals', icon: Zap },
-    { id: 'premium', label: 'Premium Edition', icon: Crown },
+    { id: 'new-launch', label: 'New Launches', icon: Zap },
+    { id: 'premium', label: 'Premium Flagships', icon: Crown },
   ];
 
   return (
@@ -32,7 +32,7 @@ export const CollectionTabs: React.FC<CollectionTabsProps> = ({
             onClick={() => onSelectCollection(tab.id)}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
               isActive
-                ? 'bg-white text-black shadow-lg shadow-white/5'
+                ? 'bg-white text-black shadow-lg shadow-white/5 font-bold'
                 : 'text-zinc-400 hover:text-white bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10'
             }`}
           >

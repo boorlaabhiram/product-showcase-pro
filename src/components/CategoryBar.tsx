@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { Headphones, Watch, Monitor, Sparkles, Home, Glasses, Compass, Cpu } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Smartphone, Laptop, Headphones, Tv, Monitor, Home, Compass, Gamepad2, Watch, Cpu } from 'lucide-react';
 import { ProductCategory } from '../types/product';
 import { CATEGORIES } from '../data/products';
 
@@ -17,18 +17,29 @@ export const CategoryBar: React.FC<CategoryBarProps> = ({
 }) => {
   const getCategoryIcon = (category: ProductCategory) => {
     switch (category) {
-      case 'Audio & Sound':
+      case 'Smartphones':
+        return Smartphone;
+      case 'Laptops':
+      case 'Gaming Laptops':
+        return Laptop;
+      case 'Headphones':
+      case 'Earbuds':
+      case 'Bluetooth Speakers':
         return Headphones;
-      case 'Smart Wearables':
-        return Watch;
-      case 'Ergonomic Setup':
+      case 'Televisions':
+        return Tv;
+      case 'Monitors':
         return Monitor;
-      case 'Creative Gear':
-        return Cpu;
       case 'Smart Home':
         return Home;
-      case 'Vision Tech':
-        return Glasses;
+      case 'Gaming Consoles':
+      case 'Gaming Mouse':
+        return Gamepad2;
+      case 'Smart Watches':
+        return Watch;
+      case 'Graphics Cards':
+      case 'CPUs':
+        return Cpu;
       default:
         return Compass;
     }

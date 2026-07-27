@@ -1,21 +1,22 @@
 import React from 'react';
-import { History, Eye, ArrowRight } from 'lucide-react';
+import { History, Eye } from 'lucide-react';
 import { Product } from '../types/product';
-import { PRODUCTS } from '../data/products';
-import { formatCurrency } from '../lib/utils';
+import { formatINR } from '../lib/utils';
 
 interface RecentlyViewedBarProps {
   recentlyViewedIds: string[];
+  allProducts: Product[];
   onQuickView: (product: Product) => void;
 }
 
 export const RecentlyViewedBar: React.FC<RecentlyViewedBarProps> = ({
   recentlyViewedIds,
+  allProducts,
   onQuickView,
 }) => {
   if (!recentlyViewedIds || recentlyViewedIds.length === 0) return null;
 
-  const products = PRODUCTS.filter((p) => recentlyViewedIds.includes(p.id));
+  const products = allProducts.filter((p) => recentlyViewedIds.includes(p.id));
   if (products.length === 0) return null;
 
   return (
@@ -43,7 +44,7 @@ export const RecentlyViewedBar: React.FC<RecentlyViewedBarProps> = ({
                   {product.name}
                 </h5>
                 <span className="text-xs font-mono text-emerald-400 font-extrabold block mt-0.5">
-                  {formatCurrency(product.price)}
+                  {formatINR(product.price)}
                 </span>
               </div>
               <Eye className="w-3.5 h-3.5 text-zinc-400 group-hover:text-white transition-colors shrink-0" />

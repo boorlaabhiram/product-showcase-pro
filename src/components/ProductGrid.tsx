@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { SearchX, Sparkles, RotateCcw } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { SearchX, RotateCcw } from 'lucide-react';
 import { Product } from '../types/product';
 import { ProductCard } from './ProductCard';
 
@@ -11,6 +11,7 @@ interface ProductGridProps {
   onToggleWishlist: (id: string) => void;
   onToggleCompare: (id: string) => void;
   onQuickView: (product: Product) => void;
+  onAddToCart?: (product: Product) => void;
   layoutMode: 'grid-4' | 'grid-3' | 'list';
   onResetFilters: () => void;
 }
@@ -22,6 +23,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   onToggleWishlist,
   onToggleCompare,
   onQuickView,
+  onAddToCart,
   layoutMode,
   onResetFilters,
 }) => {
@@ -36,12 +38,12 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center py-20 px-4 rounded-3xl bg-zinc-900/40 border border-zinc-800 max-w-xl mx-auto my-12"
+        className="text-center py-20 px-4 rounded-3xl bg-white/[0.02] border border-white/10 max-w-xl mx-auto my-12 backdrop-blur-xl"
       >
-        <div className="w-16 h-16 rounded-2xl bg-zinc-800/80 border border-zinc-700/60 flex items-center justify-center mx-auto mb-4 text-zinc-400">
+        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-4 text-zinc-400">
           <SearchX className="w-8 h-8" />
         </div>
-        <h3 className="text-xl font-bold font-serif text-white mb-2">No Matching Hardware Found</h3>
+        <h3 className="text-xl font-bold text-white mb-2">No Matching Hardware Found</h3>
         <p className="text-xs text-zinc-400 mb-6 max-w-sm mx-auto leading-relaxed">
           We couldn't find any products matching your selected search query or active filter criteria.
         </p>
@@ -68,6 +70,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
             onToggleWishlist={onToggleWishlist}
             onToggleCompare={onToggleCompare}
             onQuickView={onQuickView}
+            onAddToCart={onAddToCart}
             layoutMode={layoutMode}
           />
         ))}
