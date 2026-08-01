@@ -63,12 +63,6 @@ Showcasely is a modern AI-powered electronics showcase platform that helps users
 | Gemini AI | AI Shopping Assistant |
 | Vercel | Deployment |
 
----
-
-## 📸 Screenshots
-
-Add screenshots of your application here.
-
 ```
 Home Page
 Product Details
